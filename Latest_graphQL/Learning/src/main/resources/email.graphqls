@@ -1,0 +1,29 @@
+schema{
+query: Query
+}
+
+
+type Query{
+
+getAllEmail(user: String)  : [Email]
+}
+
+
+type Email {
+  id: ID!
+  from: String!
+  to: String!
+   subject: String!
+  body: String!
+  user:UserData!
+}
+
+type UserData {
+  id: ID!
+  username: String!
+  password: String!
+}
+
+
+
+

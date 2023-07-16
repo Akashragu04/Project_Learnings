@@ -1,0 +1,24 @@
+{
+    "short_name": "G3C - Daimler",
+    "name": "G3C - Daimler",
+    "icons": [{
+            "src": "fav.icon",
+            "sizes": "64x64 32x32 24x24 16x16",
+            "type": "image/x-icon"
+        },
+        {
+            "src": "fav.icon",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "fav.icon",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#0A8FDC",
+    "background_color": "#ffffff"
+}

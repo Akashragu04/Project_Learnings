@@ -1,0 +1,18 @@
+export enum BusinessSetupActionTypes {
+    GET_BUSINESS_SETUP_REQUEST = 'GET_BUSINESS_SETUP_REQUEST',
+    GET_BUSINESS_SETUP_SUCCESS = 'GET_BUSINESS_SETUP_SUCCESS',
+    GET_BUSINESS_SETUP_ERROR = 'GET_BUSINESS_SETUP_ERROR',
+    POST_SLA_REQUEST = 'POST_SLA_REQUEST',
+    POST_SLA_SUCCESS = 'POST_SLA_SUCCESS',
+    POST_SLA_ERROR = 'POST_SLA_ERROR',
+    PUT_SLA_REQUEST = 'PUT_SLA_REQUEST',
+    PUT_SLA_SUCCESS = 'PUT_SLA_SUCCESS',
+    PUT_SLA_ERROR = 'PUT_SLA_ERROR',
+}
+
+export interface BusinessSetupState {
+    loading: boolean,
+    items: {},
+    errors:{},
+    getBizCaseData?:any
+}

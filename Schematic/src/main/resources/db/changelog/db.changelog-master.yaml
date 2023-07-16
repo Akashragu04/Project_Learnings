@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - logicalFilePath: db.changelog-master
+  - include:
+      relativeToChangelogFile: true
+      file: rel_1.0.0/changeset-1.0.0.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: rel_1.0.1/changeset-1.0.1.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: rel_1.0.2/changeset-1.0.2.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: rel_1.0.3/changeset-1.0.3.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: rel_1.0.4/changeset-1.0.4.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: rel_1.0.5/changeset-1.0.5.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: rel_1.0.6/changeset-1.0.6.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: rel_1.0.7/changeset-1.0.7.yaml

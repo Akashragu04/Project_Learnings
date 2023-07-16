@@ -1,0 +1,113 @@
+input[type=number] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+.errormsg {
+    margin-top: 10px;
+    color: #e74c3c;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.boardLine {
+    border: "1px solid #ccc"
+}
+
+.mobileView {
+    width: auto;
+}
+
+.autoscroll {
+    width: auto;
+}
+
+.custom-tooltip {
+    background: rgba(241, 241, 241, 0.76);
+    width: 150px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.capacityBox {
+    margin-top: 0;
+    height: 350px;
+    width: 400px;
+    overflow: hidden;
+    overflow-y: auto;
+    padding-bottom: 30px;
+}
+
+.allocationresource {
+    position: 'fixed';
+}
+
+.flexcolumbox {
+    display: flex;
+    flex-direction: row;
+}
+
+.createLeadConversion {
+    width: 250px;
+    margin-left: 10px;
+}
+.navItem:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+.css-lk7d65-MuiListItem-root:hover{
+    background-color: rgba(0, 0, 0, 0.04);
+
+}
+.css-220eqv-MuiTablePagination-displayedRows{    
+    margin-bottom: 0px !important;
+}
+.css-1uqpm13-MuiTablePagination-selectLabel{
+    margin-bottom: 0px !important;
+}
+
+.MuiDataGrid-columnHeader {
+    padding-left:15px !important;
+}
+@media only screen and (max-width: 600px) {
+    .mobileView {
+        width: 280px;
+    }
+    .autoscroll {
+        overflow: hidden;
+        overflow-x: auto;
+        max-width: 280px;
+    }
+    .marginTop {
+        margin-top: 15px;
+    }
+    .hideoption {
+        display: none;
+    }
+    .capacityBox {
+        margin-top: 0;
+        height: 310;
+        width: 300;
+        overflow: hidden;
+        overflow-y: auto;
+    }
+    .allocationresource {
+        position: 'relative';
+    }
+    .flexcolumbox {
+        display: flex;
+        flex-direction: column;
+    }
+    .createLeadConversion {
+        width: 100%;
+        margin-bottom: 10px;
+        margin-left: 0px;
+    }
+}
+
+body{
+    font-family: 'CorpoS' !important;
+}

@@ -1,0 +1,52 @@
+import { all } from "redux-saga/effects";
+import { getAboutUsData, getCapabilitiesData, getCostEngineeringData, getCostEngineeringSubCntData, getCustomerServicesData, getCustomerServicesSubCntData, getFinanceControllingData,
+     getFinanceControllingSubCntData,
+     getHumanResourcesData, getHumanResourcesSubCntData, getInformationRechnologyData, getLeanProcessData, getLeanProcessSubCntData, 
+     getManufacturingEngineerData, getManufacturingEngineerSubCntData, getMissionVisionData, 
+     getProductEngineerData, getProductEngineerSubCntData, getQualityManagementData, getQualityManagementSubCntData, getServiceSubContentData, 
+     getServicesData, getSupplierManagementData, getSupplierManagementSubCntData, getTeamMembersData, getTestimonialData, 
+     getVisionData } from "../actions";
+import { commonGet, commonGetBrochure, getBrochureDetailsData, getBrochureDownloadData, getContentDetailsData, getContentDownloadData, getLatestNewsletterData, getNewsletterData,
+     getNewsletterDownloadData, postAddContentData } from "../actions/other.actions";
+
+export default function* rootSaga() {
+    yield all([    
+        getAboutUsData(),
+        getProductEngineerData(),
+        getSupplierManagementData(),
+        getQualityManagementData(),
+        getManufacturingEngineerData(),
+        getLeanProcessData(),
+        getInformationRechnologyData(),
+        getHumanResourcesData(),
+        getFinanceControllingData(),
+        getCustomerServicesData(),
+        getCostEngineeringData(),
+        getCapabilitiesData(),
+        getServicesData(),
+        getTestimonialData(),
+        getTeamMembersData(),
+        postAddContentData(),
+        getNewsletterDownloadData(),
+        getNewsletterData(),
+        getContentDownloadData(),
+        getContentDetailsData(),
+        getBrochureDownloadData(),
+        getBrochureDetailsData(),
+        getMissionVisionData(),
+        getVisionData(),
+        getServiceSubContentData(),
+        getHumanResourcesSubCntData(),
+        getQualityManagementSubCntData(),
+        getLeanProcessSubCntData(),
+        getSupplierManagementSubCntData(),
+        getManufacturingEngineerSubCntData(),
+        getFinanceControllingSubCntData(),
+        getCostEngineeringSubCntData(),
+        getCustomerServicesSubCntData(),
+        getProductEngineerSubCntData(),
+        getLatestNewsletterData(),
+        commonGet(),
+        commonGetBrochure()
+    ]);
+}

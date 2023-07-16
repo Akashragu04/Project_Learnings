@@ -1,0 +1,1546 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SLA</title>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+
+@page {
+	margin: 11px;
+	size: A4 portrait;
+}
+
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+table.slavalues td, th {
+	border: 1px solid #221a1a;
+	text-align: left;
+	padding-left: 5px;
+}
+
+u {
+	padding-bottom: 0.5px;
+	text-decoration: none;
+	border-bottom: 0.5px solid #000;
+}
+
+.heading {
+	text-align: center;
+	background: #8b8181;
+	font-size: 25px;
+	color: white;
+	padding: 5px;
+}
+
+.checkbox {
+	height: 12px
+}
+
+.orgnaization {
+	margin-top: 6px;
+	display: inline-block;
+	width: 45%;
+}
+
+.table1 {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	margin-bottom: 6px;
+}
+
+.tablehead {
+	display: flex;
+	flex-direction: column;
+}
+
+.cost_breakdown_key {
+	display: inline-flex;
+	flex-direction: row;
+	/* justify-content: space-between; */
+}
+
+.cost_breakdown_data {
+	float: right;
+	margin-right: 4px;
+	margin-top: -16px;
+}
+
+hr {
+	height: 0.2px;
+	background: #8b8181;
+	margin: 5px 0;
+	width: 99%;
+}
+
+.invoice_cycle {
+	display: inline;
+	padding-left: 20px;
+}
+
+.invoice_cycle_space {
+	padding-right: 20px;
+}
+
+.signature_table {
+	display: inline-block;
+	width: 49%;
+}
+
+table.signature_name td {
+	border-bottom: 1px solid #221a1a;
+}
+
+.signature_1 {
+	border-bottom: 1px solid black !important;
+	padding-left: 228px;
+}
+
+.signature_2 {
+	padding-left: 123px;
+}
+
+.signature_3 {
+	margin-top: 3px;
+}
+</style>
+</head>
+
+<body>
+	<h2 class="heading">Service Agreement</h2>
+
+	<table class="slavalues" style="font-size: 12px; margin-top: 13px;">
+		<tr>
+			<td style="width: 50%;">
+				<p>Service Agreement No:</p>
+				<p th:text="${sla.slaid}">
+					<b> </b>
+				</p>
+				<p>
+					Effective Date :<span th:text="${sla.effective_date}"></span>
+				</p>
+			</td>
+			<td style="width: 50%">
+				<p>Period of Service:</p>
+				<p>
+					Start Date : <span th:text="${sla.start_date}"></span>
+				</p>
+				<p>
+					End Date : <span th:text="${sla.end_date}"></span>
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table style="margin-top: 5px;">
+					<tr>
+						<td style="width: 50%; border: 0; margin: 0; vertical-align: top;">
+							<table>
+								<tr>
+									<td
+										style="width: 1%; border: 0; padding-top: 1px; vertical-align: top;"><input
+										type="checkbox" class="checkbox" /></td>
+									<td style="border: 0;"><label>Daimler HQ</label></td>
+								</tr>
+								<tr>
+									<td
+										style="width: 1%; border: 0; padding-top: 1px; vertical-align: top;"><input
+										type="checkbox" checked="checked" class="checkbox" /></td>
+									<td style="border: 0;"><label>Truck/Bus</label></td>
+								</tr>
+								<tr>
+									<td
+										style="width: 1%; border: 0; padding-top: 1px; vertical-align: top;"><input
+										type="checkbox" class="checkbox" /></td>
+									<td style="border: 0;"><label>Other Daimler
+											Affliateds</label></td>
+								</tr>
+							</table>
+						</td>
+						<td style="width: 50%; border: 0;; vertical-align: top;">
+							<table>
+								<tr>
+									<td
+										style="width: 1%; border: 0; padding-top: 1px; vertical-align: top;"><input
+										type="checkbox" class="checkbox" /></td>
+									<td style="border: 0;"><label>Cars/Van</label></td>
+								</tr>
+								<tr>
+									<td
+										style="width: 1%; border: 0; padding-top: 1px; vertical-align: top;"><input
+										type="checkbox" th:name="${organization.finance}"
+										class="checkbox" /></td>
+									<td style="border: 0;"><label>Finacial Services</label></td>
+								</tr>
+							</table>
+
+						</td>
+					</tr>
+				</table>
+				<p style="margin-top: 7px;">
+					<u>Service Provider:</u>
+				</p>
+				<p th:text="${sla.provider_company}"></p>
+				<p>
+					<span th:text="${sla.provider_address}"></span> <span
+						th:text="${sla.provider_postal_code}"></span>
+				</p>
+				<p style="margin-top: 20px;">
+					Contact Person : <span th:text="${sla.provider_name}"></span>
+				</p>
+				<p style="margin-bottom: 30px;">
+					Cost-Center : <span th:text="${sla.provider_cost_center}"></span>
+				</p>
+			</td>
+			<td>
+				<table style="margin-top: 5px;">
+					<tr>
+						<td style="width: 50%; border: 0; margin: 0; vertical-align: top;">
+							<table>
+								<tr>
+									<td
+										style="width: 1%; border: 0; padding-top: 1px; vertical-align: top;"><input
+										type="checkbox" th:checked="${organization.daimler}"
+										class="checkbox" /></td>
+									<td style="border: 0;"><label>Daimler HQ</label></td>
+								</tr>
+								<tr>
+									<td
+										style="width: 1%; border: 0; padding-top: 1px; vertical-align: top;"><input
+										type="checkbox" th:checked="${organization.truck}"
+										class="checkbox" /></td>
+									<td style="border: 0;"><label>Truck/Bus</label></td>
+								</tr>
+								<tr>
+									<td
+										style="width: 1%; border: 0; padding-top: 1px; vertical-align: top;"><input
+										type="checkbox" th:checked="${organization.other}"
+										class="checkbox" /></td>
+									<td style="border: 0;"><label>Other Daimler
+											Affliateds</label></td>
+								</tr>
+							</table>
+						</td>
+						<td style="width: 50%; border: 0;; vertical-align: top;">
+							<table>
+								<tr>
+									<td
+										style="width: 1%; border: 0; padding-top: 1px; vertical-align: top;"><input
+										type="checkbox" th:checked="${organization.car}"
+										class="checkbox" /></td>
+									<td style="border: 0;"><label>Cars/Van</label></td>
+								</tr>
+								<tr>
+									<td
+										style="width: 1%; border: 0; padding-top: 1px; vertical-align: top;"><input
+										type="checkbox" th:checked="${organization.finance}"
+										th:name="${organization.finance}" class="checkbox" /></td>
+									<td style="border: 0;"><label>Finacial Services</label></td>
+								</tr>
+							</table>
+
+						</td>
+					</tr>
+				</table>
+
+				<p style="margin-top: 9px;">
+					<u>Customer:</u>
+				</p>
+				<p th:text="${sla.customer_company}"></p>
+				<p>
+					<span th:text="${sla.customer_address}"></span>
+				</p>
+				<p style="margin-top: 20px;">
+					Contact Person : <span th:text="${sla.customer_company}"></span>
+				</p>
+				<p>
+					Cost Center: <span th:text="${sla.customer_cost_center}"></span>
+				</p>
+				<p>
+					Cost Center Manager: <span
+						th:text="${sla.customer_cost_center_manager}"></span>
+				</p>
+				<p>
+					PO-Number: <span th:text="${sla.sla_po.isEmpty()}  ? 'NA': ${sla.sla_po[0].po_number}"></span>
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<p>
+					<u>Project:</u>
+				</p>
+				<p style="margin-top: 5px;" th:text="${sla.slaname}"></p>
+				<p style="margin-top: 16px;">
+					<u>Description of Service:</u>
+				</p>
+				<p style="margin-top: 5px;" th:text="${sla.service_description}"></p>
+				
+				<p style="margin-top: 16px;">Expected Service Fee</p>
+				<p>
+					(including appropriate mark-up, without Travel costs):1 USD <span
+						th:text="${sla.total_budget}"></span>
+				</p>
+				<p style="margin-top: 16px;">
+					<u>Cost Breakdown:</u>
+				</p>
+				<hr />
+				<div class="cost_breakdown_key">
+					<p>
+						<b>Description</b>
+					</p>
+				</div>
+				<div class="cost_breakdown_data">
+
+					<p>
+						<b>Amount, <span th:text="${sla.currency}"></span>
+						</b>
+					</p>
+				</div>
+				<hr /> <th:block th:each="slaTarrif: ${sla.sla_tariffsheet}">
+					<div class="cost_breakdown_key">
+						<p>
+							<b th:text="${slaTarrif.material_description}"></b>
+						</p>
+					</div>
+					<div class="cost_breakdown_data">
+
+						<p th:text="${slaTarrif.amount}"></p>
+					</div>
+					<hr />
+				</th:block>
+
+
+				<div class="cost_breakdown_key">
+					<p>
+						<b>Markup</b>
+					</p>
+				</div>
+				<div class="cost_breakdown_data">
+					<p>2,150</p>
+				</div>
+				<hr />
+				<div style="margin-bottom: 5px;">
+					<div class="cost_breakdown_key">
+						<p>
+							<b>Total</b>
+						</p>
+					</div>
+					<div class="cost_breakdown_data">
+
+						<p>
+							<span th:text="${sla.currency}"></span> <span th:text="${sla.total_budget}"></span>
+						</p>
+					</div>
+				</div>
+
+
+
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<p style="margin-top: 5px;">
+					<u>This Service Agreement shall be governed by the following
+						terms: </u>
+				</p>
+				<p style="margin-top: 5px;">General Terms and Conditions on
+					Intra-group Services (Version 04/2019) as per Appendix 1 and in
+					case of data protection and relevance additionally as per Appendix
+					2. The respective Framework Agreement on Intra-group Services
+					between service provider and customer if existing shall not be
+					applicable. In order to implement this service agreement, the
+					parties may process for the documentation via an electronic ERP
+					(e.g. NACOS). Such documentation is processed for a system based
+					documentation and processing purposes only. In case of conflict,
+					the provisions in this service agreement shall prevail</p>
+				<hr />
+				<p style="margin: 15px 0;">
+					<u class="u_line">Condition of Payment (optional, in case of
+						deviation from the General Terms and Conditions on Intra Group
+						Services):</u>
+				</p>
+				<div class="invoice_cycle">
+					<span class="invoice_cycle_space"><input type="checkbox"
+						th:checked="${billing.year}" class="checkbox" /> <label>Per
+							Year</label></span> <span class="invoice_cycle_space"><input
+						type="checkbox" th:checked="${billing.half}" class="checkbox" />
+						<label>Per Half-Year</label></span> <span class="invoice_cycle_space"><input
+						type="checkbox" th:checked="${billing.quarter}" class="checkbox" />
+						<label>Per-Quarter</label></span> <span class="invoice_cycle_space"><input
+						type="checkbox" th:checked="${billing.month}" class="checkbox" />
+						<label>Per-Month</label></span> <span class="invoice_cycle_space"><input
+						type="checkbox" th:checked="${billing.once}" class="checkbox" />
+						<label>One-Time</label></span>
+
+				</div>
+
+			</td>
+		</tr>
+	</table>
+
+	<table
+		style="font-size: 12px; margin-top: 8px; padding: 3px; border: 1px solid black;">
+		<tr>
+			<td colspan="2"
+				style="border: 0; vertical-align: top; padding-left: 4px;">
+				<p style="margin-bottom: 8px;">
+					<b>Signatures:</b>
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td
+				style="width: 50%; border: 0; margin: 0; vertical-align: top; padding-left: 4px;">
+				<p style="margin-bottom: 5px;">
+					<b><u>Service Provider</u></b>
+				</p> <th:block th:each="slaprovider: ${slaProviders}">
+					<table class="signature_name" style="width: 83%;">
+						<tr>
+							<td style="width: 39%; border: 0;">
+								<p>Date and Signature:</p>
+							</td>
+							<td>
+								<p th:text="${slaprovider.name}+' '+${slaprovider.approved_date}"> </p>
+							</td>
+						</tr>
+					</table>
+					
+				</th:block>
+			</td>
+			<td
+				style="width: 50%; border: 0; margin: 0; vertical-align: top; padding-left: 4px;">
+				<p style="margin-bottom: 5px;">
+					<b><u>Customer</u></b>
+				</p> <th:block th:each="slacustomer: ${slaCustomers}">
+					<table class="signature_name" style="width: 83%;">
+						<tr>
+							<td style="width: 39%; border: 0;">
+								<p>Date and Signature:</p>
+							</td>
+							<td>
+								<p th:text="${slacustomer.name} +' '+${slacustomer.approved_date}"> </p>
+							</td>
+						</tr>
+					</table>
+					
+				</th:block>
+			</td>
+		</tr>
+	</table>
+
+	<p
+		style="margin-top: 20px; text-align: justify; margin-bottom: 180px; font-size: 12px;">The
+		service fee to be invoiced and paid shall equal the actual costs (in
+		line with the Transfer Pricing Guideline) incurred in supplying the
+		services plus the mark-up. The actual costs may not exceed the
+		expected total costs by more than 10%, unless agreed otherwise in
+		writing. Travel costs upon actual occurrence (in addition to the
+		service fees) are charged according to the Global Travel Policy, A16.
+		Travel cost will be charged in addition to the service fee. Thus the
+		invoices will show the actual travel cost. The expected travel costs
+		are only a best guess.</p>
+
+
+
+	<p style="padding-left: 57px">Appendix 1</p>
+
+	<h1
+		style="text-align: center; font-size: 40px; font-weight: 650; margin-top: 20px; color: #294970; font-family: Calibri">
+		DAIMLER</h1>
+	<p
+		style="font-size: 17px; font-weight: bold; padding-left: 57px; margin: 11px 0;">
+		General Terms and Conditions on Intra-Group Services</p>
+	<p style="font-weight: bold; padding-left: 57px">Version 04/2019</p>
+
+	<div style="width: 87%; padding-left: 54px; margin-bottom: 90px;">
+		<table style="font-size: 8.2px; line-height: 1.4;">
+			<tr>
+				<td style="width: 50%; border: 0">
+					<p style="font-weight: bold">Exclusively for use within
+						Daimler-Group</p>
+					<table>
+						<tr>
+							<td
+								style="width: 5%; border: 0; font-weight: bold; vertical-align: top;">
+								<p>1</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify;">
+								<p style="font-weight: bold">Subject Matter, Definitions</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top;">
+								<p>1.1</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify;">
+								<p>These General Terms and Conditions on Intra-Group
+									Services apply to Intra-Group Service Agreements between
+									Daimler AG (“Daimler”) and Affiliates of Daimler or between
+									Daimler Affiliates.</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top;">
+								<p>1.2</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify;">
+								<p>Other general terms and conditions shall not apply even
+									if such terms and conditions have not been expressly rejected.
+								</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top;">
+								<p>1.3</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify;">
+								<p>
+									Definitions <br /> <br /> In these General Terms and
+									Conditions on Intra-Group Services and the respective Service
+									Agreements, unless the context requires otherwise, terms
+									defined shall have the meanings thereby attributed to them and
+									the following terms shall have the following meanings: <br />
+									<br /> "Affiliate" means any legal entity directly or
+									indirectly owning, owned by, or under the same ownership as the
+									Party. Ownership shall exist through the direct or indirect
+									ownership or control of more than 50% of the nominal value of
+									the issued equity share capital or of more than 50% of the
+									shares entitling the holders to vote for the election of
+									directors or persons performing similar functions, or right by
+									any other means to elect or appoint directors, or persons
+									performing similar functions, who have a majority vote. <br />
+									<br /> “CUSTOMER” means the Party benefiting from the services
+									of the SERVICE PROVIDER, whichever is the CUSTOMER under the
+									respective Service Agreement. <br /> <br /> “Daimler-Group”
+									means Daimler and its Affiliates. <br /> <br /> “Duties”
+									shall mean all kind of payments assessed by authorities or to
+									be paid to authorities besides taxes, e.g. stamp duties,
+									customs duties, etc. <br /> <br /> “Force Majeure” shall mean
+									all events beyond the reasonable control of the Party affected,
+									unforeseeable and unavoidable, which prevent or delay in total
+									or in part the carrying out of its obligation (e.g. fire,
+									flood, accidents, war, riots, transportation difficulties, acts
+									of court, insurrection, civil disturbance, acts of government,
+									governmental regulations, strike, lock out or other labor
+									disputes). <br /> <br /> "Service Agreement” means a mutually
+									agreed upon document (if applicable via an electronic contract
+									system of Daimler) which describes in detail the Services to be
+									provided by the SERVICE PROVIDER hereunder. <br /> <br />
+									“SERVICE PROVIDER” means the Party which makes available
+									services, whichever is the SERVICE PROVIDER under the
+									respective Service Agreement. <br /> <br /> “Tax/Taxes” are
+									taxes as defined in section 3 (1) of German Tax Code (AO)
+									respectively as defined in corresponding provision of foreign
+									Tax Codes or of foreign tax laws and regulations.
+								</p>
+							</td>
+						</tr>
+						<br />
+						<br />
+						<tr>
+							<td
+								style="width: 5%; font-weight: bold; border: 0; vertical-align: top;">
+								<p>2</p>
+							</td>
+							<td style="border: 0; vertical-align: top;">
+								<p style="font-weight: bold; text-align: justify;">Scope of
+									Agreement</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td colspan="2" style="border: 0; vertical-align: top;">
+								CUSTOMER hereby appoints the SERVICE PROVIDER and the SERVICE
+								PROVIDER accepts the appointment to supply Services to CUSTOMER
+								as defined in Article 3 of these General Terms and Conditions on
+								Intra-Group Services.</td>
+						</tr>
+						<br />
+						<br />
+						<tr>
+							<td
+								style="width: 5%; font-weight: bold; border: 0; vertical-align: top;">
+								<p>3</p>
+							</td>
+							<td style="border: 0; vertical-align: top;">
+								<p style="font-weight: bold; text-align: justify;">Supply of
+									Services</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top;">
+								<p>3.1</p>
+							</td>
+							<td style="border: 0; vertical-align: top;">
+								<p style="text-align: justify;">The Services covered by
+									these General Terms and Conditions on Intra-Group Services
+									shall be those agreed upon in the respective Service Agreement.</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top;">
+								<p>3.2</p>
+							</td>
+							<td style="border: 0; vertical-align: top;">
+								<p style="text-align: justify;">The Service Provider agrees
+									to provide the Services to CUSTOMER on the basis of these
+									General Terms and Conditions on Intra-Group Services and the
+									respective Service Agreement. Each clause included in a Service
+									Agreement, whether by reference or otherwise, will be deemed an
+									additional term to these General Terms and Conditions on
+									Intra-Group Services. In case of inconsistencies or conflict
+									between the provisions of</p>
+							</td>
+						</tr>
+					</table>
+				</td>
+
+				<td style="width: 50%; border: 0; vertical-align: top;">
+					<table style="margin-left: 20px;">
+
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top">
+								<p></p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify">
+								<p>the Service Agreement and these General Terms and
+									Conditions on Intra-Group Services, the provisions of the
+									Service Agreement shall prevail.</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top">
+								<p>3.3</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify">
+								<p>The SERVICE PROVIDER undertakes to provide the Services
+									to the best of its ability and further undertakes that any of
+									the SERVICE PROVIDER’s personnel used to provide the Services
+									will be competent to provide them.</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top">
+								<p>3.4</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify">
+								<p>CUSTOMER undertakes to provide all reasonable assistance
+									to the SERVICE PROVIDER’s personnel to enable them to provide
+									the Services.</p>
+							</td>
+						</tr>
+						<br />
+						<br />
+						<tr>
+							<td
+								style="width: 5%; font-weight: bold; border: 0; vertical-align: top;">
+								<p>4</p>
+							</td>
+							<td style="border: 0; vertical-align: top">
+								<p style="font-weight: bold; text-align: justify">
+									Sub-Contracting</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top">
+								<p>4.1</p>
+							</td>
+							<td style="border: 0; vertical-align: top">
+								<p style="text-align: justify">Contracting an external third
+									party, which is not an affiliated company in the meaning of §§
+									15 ff. AktG (German Stock Companies Act) as a subcontractor is
+									excluded in general. The SERVICE PROVIDER shall obtain the
+									written permission of the CUSTOMER before having any services
+									performed by external third parties. These contractual
+									provisions shall apply accordingly where a third party is
+									sub-contracted.</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top">
+								<p>4.2</p>
+							</td>
+							<td style="border: 0; vertical-align: top">
+								<p style="text-align: justify">For recharging of the
+									external supplier’s fee, Section 5.2 of these General Terms and
+									Conditions on Intra-Group Services shall remain unaffected.</p>
+							</td>
+						</tr>
+						<br />
+						<br />
+						<tr>
+							<td
+								style="width: 5%; font-weight: bold; border: 0; vertical-align: top;">
+								<p>5</p>
+							</td>
+							<td style="border: 0; vertical-align: top">
+								<p style="font-weight: bold; text-align: justify">Service
+									Fees</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top">
+								<p>5.1</p>
+							</td>
+							<td style="border: 0; vertical-align: top">
+								<p style="text-align: justify">The SERVICE PROVIDER shall
+									charge the CUSTOMER a service fee (the “Service Fee”) for the
+									supply of the Services to CUSTOMER’s satisfaction. The Service
+									Fee shall equal the SERVICE PROVIDER’s costs in line with the
+									Transfer Pricing Guideline (the “Service Costs”) incurred in
+									supplying the Services plus a mark-up agreed upon by the
+									Parties in the respective Service Agreement.</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top">
+								<p>5.2</p>
+							</td>
+							<td style="border: 0; vertical-align: top">
+								<p style="text-align: justify">In case of agreed
+									sub-contracting regarding Article 4, the SERVICE PROVIDER shall
+									recharge the external supplier’s fee at cost.</p>
+							</td>
+						</tr>
+						<br />
+						<br />
+						<tr>
+							<td
+								style="width: 5%; font-weight: bold; border: 0; vertical-align: top;">
+								<p>6</p>
+							</td>
+							<td style="border: 0; vertical-align: top">
+								<p style="font-weight: bold; text-align: justify">Payment</p>
+							</td>
+						</tr>
+						<br />
+
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top">
+								<p>6.1</p>
+							</td>
+							<td style="border: 0; vertical-align: top">
+								<p style="text-align: justify">SERVICE PROVIDER may issue
+									separate invoices for specific INTRA-GROUP SERVICES and
+									amounts, as it deems appropriate. In particular, SERVICE
+									PROVIDER may issue separate invoices for fees and amounts of
+									INTRA-GROUP SERVICES rendered at different facilities. SERVICE
+									PROVIDER may issue separate invoices for fees and amounts of
+									INTRA-GROUP SERVICES executed in Germany, on the one hand, and
+									for fees and amounts of INTRA-GROUP SERVICES executed in the
+									country where the CUSTOMER is situated</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top">
+								<p>6.2</p>
+							</td>
+							<td style="border: 0; vertical-align: top">
+								<p style="text-align: justify">The agreed SERVICE FEE shall
+									be increased by Value Added Tax (“VAT”) or Goods and Service
+									Taxes (“GST”) or Sales and Service Taxes (“SST”) wherever
+									legally required and no exemption is applicable. The invoices
+									shall meet all legal requirements for deduction as input VAT or
+									refund of VAT. Invoices shall be sent to the CUSTOMER at its
+									registered office.</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top">
+								<p>6.3</p>
+							</td>
+							<td style="border: 0; vertical-align: top">
+								<p style="text-align: justify">Any payments to be made by
+									CUSTOMER under or in connection with this SERVICE AGREEMENT
+									shall be effected in the invoiced currency. Unless otherwise
+									agreed in the respective SERVICE AGREEMENT, all payments shall
+									be made by wire transfer. Payment shall be deemed made when it
+									has been credited to the account quoted by SERVICE PROVIDER.</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top">
+								<p>6.4</p>
+							</td>
+							<td style="border: 0; vertical-align: top">
+								<p style="text-align: justify">CUSTOMER shall promptly
+									obtain and continuously maintain any governmental and/or other
+									approvals required to effect any payment to SERVICE PROVIDER
+									and shall ensure effecting the payment to SERVICE PROVIDER.</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top">
+								<p>6.5</p>
+							</td>
+							<td style="border: 0; vertical-align: top">
+								<p style="text-align: justify">All banking charges and fees
+									shall be borne by the PARTY instructing the bank to render the
+									service.</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top">
+								<p>6.6</p>
+							</td>
+							<td style="border: 0; vertical-align: top">
+								<p style="text-align: justify">In the event of delay in any
+									payment, SERVICE PROVIDER shall be entitled to claim damages by
+									charging interests at a rate on the amount due for the period
+									of delay as specified by applicable laws. SERVICE PROVIDER
+									shall be entitled to claim damages exceeding this amount, and,
+									if CUSTOMER can prove, that the damage is lower, shall be
+									obligated to pay such lower amount only.</p>
+							</td>
+						</tr>
+					</table>
+
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="border: 0;"><p
+						style="text-align: right; margin: 25px -20px 0 0; font-size: 15px;">1</p></td>
+			</tr>
+		</table>
+	</div>
+	<p style="padding-left: 57px; margin-bottom: 20px;">Appendix 1</p>
+	<div style="width: 89%; padding-left: 49px; margin-bottom: 90px;">
+		<table style="font-size: 8.2px; line-height: 1.4;">
+			<tr>
+				<td style="width: 50%; border: 0; vertical-align: top;">
+
+					<table>
+						<tr>
+							<td
+								style="width: 5%; border: 0; font-weight: bold; vertical-align: top;">
+								<p>7</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify;">
+								<p style="font-weight: bold">Taxation</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top;">
+								<p>7.1</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify;">
+								<p>The Parties shall take all measures in accordance with
+									their respective domestic law and the Agreement between the
+									Country of the Service Provider and the Country of the CUSTOMER
+									for the Avoidance of Double Taxation with respect to Taxes on
+									Income and Capital as in force at any given time ("the Tax
+									Treaty"), if any, to ensure a reduction of or exemption from,
+									as the case may be, taxes which might become payable in
+									connection with the respective Service Agreement and these
+									General Terms and Conditions on Intra-Group Services. The
+									Parties shall also take all measures in accordance with
+									domestic law to ensure payment of customs duties legally owed
+									in connection with rights and obligations arising from the
+									respective treaty.</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top;">
+								<p>7.2</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify;">
+								<p>All taxes or duties of any kind whatsoever in connection
+									with payments made by CUSTOMER and imposed on SERVICE PROVIDER
+									by the SERVICE PROVIDER’s local tax authorities shall be borne
+									by the SERVICE PROVIDER.</p>
+							</td>
+						</tr>
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top;">
+								<p>7.3</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify;">
+								<p>All taxes or duties of any kind whatsoever in connection
+									with payments made by the CUSTOMER and imposed or to be paid in
+									the CUSTOMER’s country shall be borne by the CUSTOMER. The
+									preceding sentence does not apply to income taxes imposed or
+									withheld in accordance with the domestic law and the Treaty, if
+									any.</p>
+							</td>
+						</tr>
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top;">
+								<p>7.4</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify;">
+								<p>In case the CUSTOMER is required to withhold taxes in
+									accordance with the domestic law and the Tax Treaty, if any,
+									from the payments under the respective Service Agreement and
+									these General Terms and Conditions on Intra-Group Services, the
+									CUSTOMER shall exercise its best effort to attain that the
+									payment to the SERVICE PROVIDER will be taxed at any, reduced
+									rate under the Tax Treaty, if any, or under domestic law at the
+									time of payment.</p>
+							</td>
+						</tr>
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top;">
+								<p>7.5</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify;">
+								<p>In case the CUSTOMER is required to withhold taxes from
+									payments under the respective Service Agreement and these
+									General Terms and Conditions on Intra-Group Services, the
+									CUSTOMER shall provide the SERVICE PROVIDER without undue delay
+									with copies of the tax receipt and any other documents that
+									evidence calculation and payment of the tax. These documents
+									shall specify the SERVICE PROVIDER as tax payer, the amount of
+									tax paid, the tax law and the legal regulation on which such
+									tax payment is based, the tax rate or the amount on which such
+									rate is based, and the date of payment of the tax.</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top;">
+								<p>7.6</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify;">
+								<p>If the documents of the tax authority are issued in a
+									language other than the mother language of the SERVICE PROVIDER
+									or English, the CUSTOMER shall have the documents translated
+									into the mother language of the SERVICE PROVIDER or English at
+									its own expense at the request of the SERVICE PROVIDER and
+									shall have the correctness of such translation certified either
+									officially or by a notary public.</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top;">
+								<p>7.7</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify;">
+								<p>CUSTOMER shall not be responsible for declaring and
+									bearing of personal income tax or for withholding of such
+									personal income tax if services performed by personnel of
+									SERVICE PROVIDER becomes liable for personal income tax.</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top;">
+								<p>7.8</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify;">
+								<p>The agreed price is a net amount and shall be increased
+									by the applicable statutory VAT by DAIMLER, if any. If an
+									exemption from statutory VAT depends on further requirements,
+									DAIMLER may charge a respective VAT amount or VAT-deposit
+									amount as a security, which shall be refunded without interests
+									upon proved fulfilment of the requirements, i.e. receipt of
+									proper documentation and proofs.</p>
+							</td>
+						</tr>
+						<br />
+						<br />
+						<br />
+						<tr>
+							<td
+								style="width: 5%; font-weight: bold; border: 0; vertical-align: top;">
+								<p>8</p>
+							</td>
+							<td style="border: 0; vertical-align: top;">
+								<p style="font-weight: bold; text-align: justify;">Documentation</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td colspan="2" style="border: 0; vertical-align: top;">The
+								SERVICE PROVIDER shall keep true and accurate books and records
+								in such detail as is necessary to identify the costs in
+								rendering the Services to the CUSTOMER contemporaneously.</td>
+						</tr>
+						<br />
+						<br />
+						<tr>
+							<td
+								style="width: 5%; font-weight: bold; border: 0; vertical-align: top;">
+								<p>9</p>
+							</td>
+							<td style="border: 0; vertical-align: top;">
+								<p style="font-weight: bold; text-align: justify;">Indemnification,
+									Limitation of Liability</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top;">
+								<p>9.1</p>
+							</td>
+							<td style="border: 0; vertical-align: top;">
+								<p style="text-align: justify;">The Parties, their employees
+									and their agents and subcontractors, when acting on the basis
+									of the respective Service Agreement and these General Terms and
+									Conditions on Intra-Group Services or in connection herewith
+									shall be liable to the extent prescribed by law for losses
+									resulting from injury to life, body or health, fraudulent
+									misrepresentation, breaches of guarantees and of data
+									protection or data security obligations. Apart from that and
+									save as otherwise provided in these General Terms and
+									Conditions on Intra-Group Services the Parties shall only be
+									liable to the extent that their acts or omissions have been
+									committed by gross negligence or willful intent. Except for
+									willful intent any liability with regard to consequential or
+									indirect damages, such as loss of profit and damages arising
+									from claims asserted by third parties, shall be excluded.</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top">
+								<p>9.2</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify">
+								<p>Within the above mentioned assumption of liability the
+									SERVICE PROVIDER will defend, indemnify, and hold the CUSTOMER
+									harmless against all claims, liabilities, losses, damages, and
+									settlement expenses in connection with any breach by the
+									SERVICE PROVIDER of these General Terms and Conditions on
+									Intra-Group Services or for injury or death of any person and
+									damage or</p>
+							</td>
+						</tr>
+
+					</table>
+				</td>
+
+				<td style="width: 50%; border: 0; vertical-align: top;">
+					<table style="margin-left: 20px;">
+
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top">
+								<p></p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify">
+
+								<p>loss of any property allegedly or actually resulting from
+									or arising out of any act, omission or negligent work of the
+									SERVICE PROVIDER or its employees, agents, or subcontractors in
+									connection with performing these General Terms and Conditions
+									on Intra-Group Services.</p>
+							</td>
+						</tr>
+						<br />
+						<br />
+						<tr>
+							<td
+								style="width: 5%; font-weight: bold; border: 0; vertical-align: top;">
+								<p>10</p>
+							</td>
+							<td style="border: 0; vertical-align: top;">
+								<p style="font-weight: bold; text-align: justify;">Force
+									Majeure</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td colspan="2" style="border: 0; vertical-align: top;">In
+								case of Force Majeure affecting the fulfilment of a substantial
+								provision of any Service Agreement, the Party so affected, upon
+								giving prompt notice to the other Party, shall be temporarily
+								excused for the performance of its obligations to the extent of
+								the prevention, and shall not be committed to the payment of any
+								compensation but shall use its best efforts to minimize the
+								consequences, to remove the cause of non-performance, to
+								co-operate with the other Parties in finding alternative ways
+								and means of fulfilling its obligations, and shall make up,
+								continue and complete full performance hereunder without delay
+								whenever such causes are removed. The Parties shall endeavor to
+								adapt the respective Service Agreement to the new situation. In
+								case the Parties do not agree upon such adaptation within a
+								period of six months, the respective Service Agreement may be
+								terminated by any Party by written notice without need for any
+								further legal or judicial action.</td>
+						</tr>
+						<br />
+						<br />
+						<br />
+						<tr>
+							<td
+								style="width: 5%; font-weight: bold; border: 0; vertical-align: top;">
+								<p>11</p>
+							</td>
+							<td style="border: 0; vertical-align: top;">
+								<p style="font-weight: bold; text-align: justify;">Confidentiality</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top;">
+								<p>11.1</p>
+							</td>
+							<td style="border: 0; vertical-align: top;">
+								<p style="text-align: justify;">
+									During the term of the respective Service Agreement and after
+									its termination neither Party (“the receiving Party”) shall
+									utilize or disclose to third parties any business or industrial
+									secrets of the other which were confided to the receiving Party
+									or of which the receiving Party gained knowledge on occasion of
+									the cooperation save to the extent expressly permitted by these
+									General Terms and Conditions on Intra-Group Services. The same
+									shall apply to the respective Service Agreement and these
+									General Terms and Conditions on Intra-Group Services itself.
+									Any technical information, in particular inventions,
+									experience, findings or designs to which a Party gains access
+									at the other Party's facilities or which a Party receives from
+									the other Party within the framework of the cooperation under
+									the respective Service Agreement and these General Terms and
+									Conditions on Intra-Group Services, shall be used by the
+									receiving Party within the framework of the cooperation only,
+									and shall be treated as confidential and shall not be disclosed
+									to third parties even after termination of the respective
+									Service Agreement. <br /> The Parties shall subject their
+									employees to substantially the same obligations of
+									confidentiality. <br /> This secrecy obligation does not apply
+									to information which can be proved to have been known to the
+									receiving Party prior to the placement of the design work
+									order, or to have been handed over to the receiving Party
+									legitimately by third parties, or to have already been publicly
+									known when the design work order was placed, or to have become
+									publicly known subsequently without any violation of the
+									obligations under these General Terms and Conditions on
+									Intra-Group Services, or to have been independently developed
+									by the receiving Party. Further, this secrecy obligation shall
+									not apply with regard to Affiliates of Daimler, provided these
+									Affiliates are subject to equivalent confidentiality
+									obligations.
+								</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top;">
+								<p>11.2</p>
+							</td>
+							<td style="border: 0; vertical-align: top;">
+								<p style="text-align: justify;">The Parties agree to treat
+									the Services to be carried out as confidential during the term
+									of the respective Service Agreement and for a period of three
+									years after completion of the Services and to inform third
+									parties only to the extent this is necessary for carrying out
+									the work.</p>
+							</td>
+						</tr>
+						<br />
+						<br />
+						<br />
+						<tr>
+							<td
+								style="width: 5%; font-weight: bold; border: 0; vertical-align: top;">
+								<p>12</p>
+							</td>
+							<td style="border: 0; vertical-align: top;">
+								<p style="font-weight: bold; text-align: justify;">Data
+									Protection</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td colspan="2" style="border: 0; vertical-align: top;">In
+								case the Parties process personal data of the other Party, they
+								will comply with relevant data protection laws and the internal
+								data protection policy, as amended from time to time. The
+								principles of fairness and lawfulness, purpose limitation,
+								transparency, data minimization and economy, deletion, accuracy,
+								confidentiality, data security and reliability shall be taken
+								into account at any time when personal data is being processed.
+								The Parties shall ensure that persons who process personal data
+								of the other Party know the relevant data protection regulations
+								and will treat the data confidentially. The Parties undertake to
+								implement appropriate technical and organizational measures to
+								ensure an appropriate security level. All information and data
+								shall be safeguarded immediately and effectively against
+								unauthorized access, modification, destruction or loss,
+								unauthorized transfer, other unauthorized processing, and other
+								misuse.<br /> In case the Parties process personal data in the
+								course of the execution of the respective Service Agreement,
+								Appendix 2 with the relevant data protection agreement
+								(“Agreement on data processing on behalf”; “Joint Controllership
+								Agreement” or “Controller-to-Controller-Agreement”) has to be
+								concluded between the Parties.<br /> Clause 4.1 regarding the
+								contracting of third parties shall also apply to data
+								protection.
+							</td>
+						</tr>
+
+					</table>
+
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="border: 0;">
+					<p
+						style="text-align: right; margin: 32px -20px 0 0; font-size: 15px; padding-top: 20px">2</p>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<p style="padding-left: 57px; margin-bottom: 20px">Appendix 1</p>
+	<div style="width: 89%; padding-left: 49px;">
+		<table style="font-size: 8.2px; line-height: 1.4;">
+			<tr>
+				<td style="width: 50%; border: 0">
+
+					<table>
+						<tr>
+							<td
+								style="width: 5%; font-weight: bold; border: 0; vertical-align: top;">
+								<p>13</p>
+							</td>
+							<td style="border: 0; vertical-align: top;">
+								<p style="font-weight: bold; text-align: justify;">Compliance
+									with Laws</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td colspan="2" style="border: 0; vertical-align: top;">The
+								Parties will comply with all laws relating to its performance
+								under the respective Service Agreement and these General Terms
+								and Conditions on Intra-Group Services and will defend,
+								indemnify and hold the other Party harmless against all claims,
+								liabilities, losses, damages, and settlement expenses resulting
+								from its non-compliance.</td>
+						</tr>
+						<br />
+						<br />
+						<tr>
+							<td
+								style="width: 5%; border: 0; font-weight: bold; vertical-align: top;">
+								<p>14</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify;">
+								<p style="font-weight: bold">Term of the Service Agreement,
+									Termination</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top;">
+								<p>14.1</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify;">
+								<p>The term of the Services shall be as defined in the
+									respective Service Agreement. Further, either Party may
+									terminate the respective Service Agreement without cause by
+									giving at least six months prior written notice to the other
+									Party.</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top;">
+								<p>14.2</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify;">
+								<p>
+									If any of the following events of default occurs to a Party,
+									such Party will be a Defaulting Party, and the Non-Defaulting
+									Party may exercise the applicable rights set out in Article
+									14.3 below:<br />
+								<div style="width: 90%; padding-left: 30px;">
+									<ul>
+										<li>The Defaulting Party breaches any of its material
+											obligations under the respective Service Agreement or these
+											General Terms and Conditions on Intra-Group Services, which
+											it fails to rectify within 30 days of receiving written
+											notification of such breach.</li>
+										<li>The Defaulting Party becomes insolvent, bankrupt or
+											has a receiver, manager or similar officer appointed over the
+											whole or any part of its assets or an order or resolution is
+											made for its winding up, dissolution or liquidation or it
+											becomes unable to pay its debts as they fall due</li>
+										<li>The Defaulting Party ceases to be a member of the
+											Daimler-Group.</li>
+									</ul>
+								</div>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top;">
+								<p>14.3</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify;">
+								<p>If an event of default occurs as to a Defaulting Party,
+									then the Non-Defaulting Party may terminate the respective
+									Service Agreement by sending 5 days prior written notice of
+									termination. Any such termination notice must be send within 90
+									days of occurrence of the event of default; otherwise, no
+									Service Agreement may be terminated under this Article 14.3.
+									The Defaulting Party shall not be entitled to any compensation
+									or damages or any other remedy in respect of such termination.
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top;">
+								<p>14.4</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify;">
+								<p>In the event of termination, the SERVICE PROVIDER shall
+									receive remuneration in respect of those services which the
+									SERVICE PROVIDER has demonstrably provided up to the time at
+									which the notice of termination enters into effect. Termination
+									will not release either Party from any outstanding obligations
+									accruing prior to such termination, including without
+									limitation, the payment of any monies.</p>
+							</td>
+						</tr>
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top;">
+								<p>14.5</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify;">
+								<p>Upon termination or expiry of the respective Service
+									Agreement by any Party the other Party shall cease immediately
+									to make any use of the other's confidential information and
+									shall return such confidential information to the other or, if
+									requested, destroy documentary records or evidence of the same.
+								</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top;">
+								<p>14.6</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify;">
+								<p>Notwithstanding any termination, the rights and
+									obligations of the Parties under Article 11 will continue after
+									termination.</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top;">
+								<p>14.7</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify;">
+								<p>Any termination notice shall be made in writing in order
+									to be effective.</p>
+							</td>
+						</tr>
+						<br />
+						<br />
+						<tr>
+							<td
+								style="width: 5%; font-weight: bold; border: 0; vertical-align: top;">
+								<p>15</p>
+							</td>
+							<td style="border: 0; vertical-align: top;">
+								<p style="font-weight: bold; text-align: justify;">Agency</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td colspan="2" style="border: 0; vertical-align: top;">
+								Nothing in the respective Service Agreement or these General
+								Terms and Conditions on Intra-Group Services shall constitute or
+								shall be deemed to constitute any form of partnership between
+								the Parties or be deemed to constitute either Party as agent of
+								the other for any purpose whatsoever. Neither Party is empowered
+								to act for, bind nor otherwise assume any obligation on behalf
+								of the other and neither Party shall hold itself out as having
+								authority to do the same.</td>
+						</tr>
+						<br />
+						<br />
+						<tr>
+							<td
+								style="width: 5%; font-weight: bold; border: 0; vertical-align: top;">
+								<p>16</p>
+							</td>
+							<td style="border: 0; vertical-align: top;">
+								<p style="font-weight: bold; text-align: justify;">Waiver</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td colspan="2" style="border: 0; vertical-align: top;">The
+								failure of either Party to enforce, at any time, or for any
+								period of time, the terms of the respective Service Agreement or
+								these General Terms and Conditions on Intra-Group Services shall
+								not be construed as a waiver of such provision and shall in no
+								way affect that Party's right later to enforce such terms</td>
+						</tr>
+						<br />
+						<br />
+						<tr>
+							<td
+								style="width: 5%; font-weight: bold; border: 0; vertical-align: top;">
+								<p>17</p>
+							</td>
+							<td style="border: 0; vertical-align: top;">
+								<p style="font-weight: bold; text-align: justify;">
+									Miscellaneous Provisions</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top">
+								<p>17.1</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify">
+								<p>Any amendments of, and supplements to, these General
+									Terms and Conditions on Intra-Group Services and the respective
+									Service Agreement shall be made in writing or via an electronic
+									contract system of Daimler. The requirement that such
+									amendments and supplements must be made in writing can only be
+									waived in writing or via an electronic contract system of
+									Daimler.</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top">
+								<p>17.2</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify">
+								<p>Should any one or several of the provisions of the
+									respective Service Agreement or these General Terms and
+									Conditions on Intra-Group Services be or become invalid, this
+									shall not affect the validity of the other provisions. The
+									Parties agree to replace the legally invalid provision, if
+									possible, by an effective provision whose economic effect is as
+									similar as possible to the original provision, and the Parties
+									agree that this new provision shall be deemed to have been
+									agreed upon from the time when the original provision became
+									invalid.</p>
+							</td>
+						</tr>
+
+					</table>
+				</td>
+
+				<td style="width: 50%; border: 0; vertical-align: top;">
+					<table style="margin-left: 20px;">
+
+
+
+						<tr>
+							<td
+								style="width: 5%; font-weight: bold; border: 0; vertical-align: top;">
+								<p>18</p>
+							</td>
+							<td style="border: 0; vertical-align: top;">
+								<p style="font-weight: bold; text-align: justify;">
+									Applicable Law and Arbitration</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top">
+								<p>18.1</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify">
+								<p>The respective Service Agreement and these General Terms
+									and Conditions on Intra-Group Services and all questions
+									arising out of or in connection with the respective Service
+									Agreement and these General Terms and Conditions on Intra-Group
+									Services shall be governed by and construed in accordance with
+									the laws of the Federal Republic of Germany without giving
+									effect to its conflict of law rules; the terms and conditions
+									of the respective Service Agreement and these General Terms and
+									Conditions on Intra-Group Services shall not be subject to the
+									German law rules on general standard terms and conditions (sec.
+									305 et seqq. of the German Civil Code).</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top">
+								<p>18.2</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify">
+								<p>Provided that these General Terms and Conditions on
+									Intra-Group Services shall be used for Service Agreements
+									between two parties both having their principal offices in
+									countries other than Germany, the respective Service Agreement
+									and these General Terms and Conditions on Intra-Group Services
+									and all questions arising out of or in connection with the
+									respective Service Agreement and these General Terms and
+									Conditions on Intra-Group Services shall be governed by and
+									construed in accordance with the laws of the country where the
+									SERVICE PROVIDER has its principal office.</p>
+							</td>
+						</tr>
+						<br />
+						<tr>
+							<td style="width: 5%; border: 0; vertical-align: top">
+								<p>18.3</p>
+							</td>
+							<td style="border: 0; vertical-align: top; text-align: justify">
+								<p>The respective Service Agreement and these General Terms
+									and Conditions on Intra-Group Services are based on mutual
+									trust and confidence. The Parties shall try to settle any
+									disputes amicably. If it is not possible to reach such an
+									amicable settlement, all disputes, controversies or claims
+									arising from the interpretation, performance or non-performance
+									of the respective Service Agreement and these General Terms and
+									Conditions on Intra-Group Services shall be finally and
+									completely resolved by arbitration in accordance with the Rules
+									of Conciliation and Arbitration of the International Chamber of
+									Commerce (ICC), by three arbitrators appointed in accordance
+									with the ICC rules in force at the time of commencement of the
+									arbitration. The arbitration proceedings will be conducted in
+									the English language. The place of arbitration is Stuttgart,
+									Germany. In case of clause 18.2 the place of arbitration shall
+									be at the principal office of the SERVICE PROVIDER.</p>
+							</td>
+						</tr>
+					</table>
+
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="border: 0;">
+					<p
+						style="text-align: right; margin: 25px -20px 0 0; font-size: 15px;">3</p>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+
+
+</body>
+
+</html>

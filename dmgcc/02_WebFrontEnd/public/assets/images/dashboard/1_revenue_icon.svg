@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 58 58" width="58" height="58">
+	<title>1_revenue_icon-svg</title>
+	<style>
+		.s0 { fill: #f8effb } 
+		.s1 { fill: #9e49e6 } 
+	</style>
+	<path id="Layer" fill-rule="evenodd" class="s0" d="m29 1c15.4 0 28 12.5 28 28 0 15.5-12.6 28-28 28-15.4 0-28-12.5-28-28 0-15.5 12.6-28 28-28z"/>
+	<path id="Layer" fill-rule="evenodd" class="s1" d="m38.6 19.9h-20.9v-1.9h20.9zm-4.3 10.8c0 2.3 1.9 4.1 4.2 4.1h1.8v5.2h-24.3v-18.6h24.3v5.2h-1.8c-2.3 0-4.2 1.9-4.2 4.1zm7.7-2.6v5.2h-3.5c-1.5 0-2.7-1.2-2.7-2.6 0-1.4 1.2-2.6 2.7-2.6zm-1.8 1.9h-1.7v1.5h1.7z"/>
+</svg>

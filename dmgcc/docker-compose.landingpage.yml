@@ -1,0 +1,14 @@
+version: '3'
+services:
+    landingpage:
+      restart: always
+      build:
+        context: 10_Landing_Page
+        args:
+          TAG: ${TAG}
+          REACT_APP_API_URL: ${REACT_APP_API_URL}
+          REACT_APP_WEBSITE_NAME: ${REACT_APP_WEBSITE_NAME}
+      container_name: dmgcclandingpage-${TAG}
+      image: dmgcclandingpage:${TAG}
+      ports:
+        - '9045:80'

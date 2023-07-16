@@ -1,0 +1,26 @@
+version: '3'
+services:
+    dmgccappviewdemo01:
+      restart: always
+      build:
+        context: 09-ThemeFile
+        dockerfile: Dockerfile.demo1
+        args:
+          TAG: ${TAG}
+          ENVMODE: development
+      container_name: dmgccappviewdemo01-${TAG}
+      image: dmgccappviewdemo01:${TAG}
+      ports:
+        - '9041:80'
+    dmgccappviewdemo02:
+      restart: always
+      build:
+        context: 09-ThemeFile
+        dockerfile: Dockerfile.demo2
+        args:
+          TAG: ${TAG}
+          ENVMODE: development
+      container_name: dmgccappviewdemo02-${TAG}
+      image: dmgccappviewdemo02:${TAG}
+      ports:
+        - '9042:80'

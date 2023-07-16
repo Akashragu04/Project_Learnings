@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - logicalFilePath: changeset-rel_1.0.1
+  - changeSet:
+      id: mbapps-schematic-service
+      author: mbapps-schematic-user
+      changes:
+        - sqlFile:
+            dbms: mysql
+            encoding: utf8
+            endDelimiter: \n;
+            path: classpath:/db/changelog/rel_1.0.1/mbapps-schematic-service-1.0.1.sql
+            relativeToChangelogFile: false
+            splitStatements: true
+            stripComments: true

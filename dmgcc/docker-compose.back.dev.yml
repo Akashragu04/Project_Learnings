@@ -1,0 +1,18 @@
+version: '3'
+services:
+    dmg3cdevapi:
+      container_name: dmg3capi-${TAG}
+      image: dmg3capi:${TAG}
+      restart: always
+      build:
+        context: 03_RestBackEnd/dmgcc
+      ports:
+       - "${SERVICEPORT}:8080"
+      volumes:
+        - ./03_RestBackEnd/dmgcc:/usr/src/mymaven
+        - ./03_RestBackEnd/dmgcc/.m2:/root/.m2
+      environment:
+        - SPRING_DATASOURCE_URL=jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
+        - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
+        - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
+        - SPRING_JPA_HIBERNATE_DDL_AUTO=update

@@ -1,0 +1,13 @@
+version: '3'
+services:
+    dmgccappview:
+      restart: always
+      #build:
+        #context: 02_WebFrontEnd
+        #args:
+          #TAG: ${TAG}
+          #ENVMODE: development
+      container_name: dmg3cview-${TAG}
+      image: nexus.izserver8.in:8085/dmg3cview:${TAG}
+      ports:
+        - '${WEBPORT}:80'

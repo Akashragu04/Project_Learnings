@@ -1,0 +1,13 @@
+version: '3'
+services:
+    dmgccprodview:
+      restart: always
+      build:
+        context: 02_WebFrontEnd
+        args:
+          TAG: ${TAG}
+          ENVMODE: production
+      container_name: dmg3cprodview-${TAG}
+      image: nexus.izserver8.in:8085/dmg3cprodview:${TAG}
+      ports:
+        - '${WEBPORT}:80'

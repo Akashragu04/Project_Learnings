@@ -1,0 +1,1 @@
+export const bizCaseSetupChartData:any = [];
